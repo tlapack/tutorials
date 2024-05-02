@@ -6,7 +6,7 @@
 			"label": "Build active file using GNU make",
 			"command": "/usr/bin/make",
 			"args": [
-				"${fileDirname}/${fileBasenameNoExtension}.out"
+				"${fileBasenameNoExtension}.out"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
