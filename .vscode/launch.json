@@ -6,11 +6,11 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            // "preLaunchTask": "Build active file using GNU make",
+            "preLaunchTask": "Build active file using GNU make",
             "MIMode": "gdb",
             "setupCommands": [
                 {

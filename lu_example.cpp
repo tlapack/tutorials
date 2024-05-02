@@ -16,9 +16,9 @@
 int main()
 {
     using T = double;
-    using idx_t = int;
+    using idx_t = size_t;
 
-    int n = 5;
+    idx_t n = 10;
 
     // Create a matrix and vector
     // Note: these are all managed as objects
@@ -28,18 +28,18 @@ int main()
     std::vector<idx_t> ipiv(n);
 
     // Initialize the matrix
-    for (int i = 0; i < n; i++)
+    for (idx_t i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (idx_t j = 0; j < n; j++)
         {
-            A(i, j) = rand() % 10;
+            A(i, j) = rand() % 100;
         }
     }
 
     std::cout << "Matrix A:" << std::endl;
-    for (int i = 0; i < n; i++)
+    for (idx_t i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (idx_t j = 0; j < n; j++)
         {
             std::cout << std::setw(9) << A(i, j) << " ";
         }
@@ -52,9 +52,9 @@ int main()
     std::cout << "Info:" << info << std::endl;
 
     std::cout << "Matrix L:" << std::endl;
-    for (int i = 0; i < n; i++)
+    for (idx_t i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (idx_t j = 0; j < n; j++)
         {
             if (i > j)
             {
@@ -73,9 +73,9 @@ int main()
     }
 
     std::cout << "Matrix U:" << std::endl;
-    for (int i = 0; i < n; i++)
+    for (idx_t i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (idx_t j = 0; j < n; j++)
         {
             if (i <= j)
             {
@@ -90,7 +90,7 @@ int main()
     }
 
     std::cout << "Pivot vector:" << std::endl;
-    for (int i = 0; i < n; i++)
+    for (idx_t i = 0; i < n; i++)
     {
         std::cout << ipiv[i] << " ";
     }
@@ -105,9 +105,9 @@ int main()
     }
 
     std::cout << "inv(P) * L*U:" << std::endl;
-    for (int i = 0; i < n; i++)
+    for (idx_t i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (idx_t j = 0; j < n; j++)
         {
             std::cout << std::setw(9) << A(i, j) << " ";
         }
