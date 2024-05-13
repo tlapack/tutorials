@@ -8,10 +8,14 @@
 #include <tlapack/plugins/legacyArray.hpp>
 #include <tlapack/lapack/getrf.hpp>
 #include <tlapack/lapack/lu_mult.hpp>
+#include <tlapack/lapack/lange.hpp>
+#include <tlapack/lapack/lacpy.hpp>
 
 #include <vector>
 #include <iostream>
 #include <iomanip>
+
+using namespace tlapack;
 
 int main()
 {
@@ -25,6 +29,8 @@ int main()
     // no need to deallocate them manually
     std::vector<T> A_(n * n);
     tlapack::LegacyMatrix<T, idx_t> A(n, n, A_.data(), n);
+    std::vector<T> A_copy_(n * n);
+    tlapack::LegacyMatrix<T, idx_t> A_copy(n, n, A_copy_.data(), n);
     std::vector<idx_t> ipiv(n);
 
     // Initialize the matrix
@@ -35,6 +41,9 @@ int main()
             A(i, j) = rand() % 100;
         }
     }
+
+    // Store A in A_copy for later testing
+    lacpy(Uplo::General, A, A_copy); 
 
     std::cout << "Matrix A:" << std::endl;
     for (idx_t i = 0; i < n; i++)
@@ -113,6 +122,15 @@ int main()
         }
         std::cout << std::endl;
     }
+
+    // Calculate A - inv(P) * L*U (i.e. check the result of lu and lu_mult)
+    for (idx_t i = 0; i < n; i++)
+        for (idx_t j = 0; j < n; j++)
+            A_copy(i, j) -= A(i, j);
+
+    auto error_norm = tlapack::lange(tlapack::Norm::Fro, A_copy);
+    std::cout << "Error norm: " << error_norm << std::endl;
+
 
     return 0;
 }
