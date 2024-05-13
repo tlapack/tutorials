@@ -19,18 +19,17 @@ using namespace tlapack;
 
 int main()
 {
-    // using T = double;
-    using T = mpfr::mpreal;
+    using T = double;
     using idx_t = size_t;
 
     idx_t n = 10;
 
 
-    const int digits = 50;
+    // const int digits = 50;
 
-    // // Setup default precision for all subsequent computations
-    // // MPFR accepts precision in bits - so we do the conversion
-    mpfr::mpreal::set_default_prec(mpfr::digits2bits(digits));
+    // // // Setup default precision for all subsequent computations
+    // // // MPFR accepts precision in bits - so we do the conversion
+    // mpfr::mpreal::set_default_prec(mpfr::digits2bits(digits));
 
 
     // Create a matrix and vector
